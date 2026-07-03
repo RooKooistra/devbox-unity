@@ -1,9 +1,5 @@
 # Contributing to DevBox Unity
 
-Thank you for considering a contribution.
-
-DevBox Unity exists to make Unity development on immutable Linux easier, safer, and more reproducible.
-
 ## Project Values
 
 Contributions should support at least one of these goals:
@@ -14,13 +10,14 @@ Contributions should support at least one of these goals:
 - Respect the developer
 - Improve documentation
 
-## Development Standards
+## Script Standards
 
-- Prefer readable shell over clever shell.
+- Use Bash.
+- Prefer readable code over clever code.
+- Use `set -Eeuo pipefail`.
 - Keep scripts idempotent where practical.
-- Do not remove or overwrite user data without confirmation.
-- Explain potentially surprising actions before performing them.
-- Keep beginner users in mind without reducing power-user capability.
+- Do not remove user data without confirmation.
+- Use helpers from `lib/` instead of duplicating logic.
 
 ## Commit Style
 

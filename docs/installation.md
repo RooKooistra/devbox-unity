@@ -1,8 +1,14 @@
 # Installation
 
-Full installation instructions will be added in Milestone 2.
+Milestone 2 provides the installer framework only.
 
-The planned container creation flow is:
+## Test the framework
+
+```bash
+./install.sh --dry-run
+```
+
+## Planned container creation
 
 ```bash
 distrobox create \

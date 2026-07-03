@@ -1,15 +1,37 @@
 # Changelog
 
-All notable changes to DevBox Unity will be documented in this file.
+All notable changes to this project will be documented in this file.
+
+The format is based on Keep a Changelog.
 
 ## [Unreleased]
 
 ### Added
 
-- Initial repository structure.
-- Project README.
+-
+
+---
+
+## [0.2.0] - 2026-07-04
+
+### Added
+
+- Installer framework.
+- Configuration loader.
+- Dry-run mode.
+- Host/container detection.
+- Shared shell libraries.
+- Smoke test.
+
+---
+
+## [0.1.0] - 2026-07-03
+
+### Added
+
+- Repository structure.
+- Initial README.
 - MIT License.
-- Contribution guidelines.
+- Contribution guide.
+- Code of Conduct.
 - Security policy.
-- Installer framework placeholder.
-- Shared shell helper libraries.

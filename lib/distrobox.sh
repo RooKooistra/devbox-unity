@@ -5,6 +5,10 @@ dbu_has_distrobox() {
   command -v distrobox >/dev/null 2>&1
 }
 
+dbu_has_distrobox_export() {
+  command -v distrobox-export >/dev/null 2>&1
+}
+
 dbu_check_distrobox() {
   if dbu_has_distrobox; then
     dbu_success "Distrobox found."

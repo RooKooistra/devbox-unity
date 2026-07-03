@@ -10,6 +10,10 @@ dbu_require_command() {
   fi
 }
 
+dbu_in_container() {
+  [[ -f /.dockerenv ]] || [[ -n "${container:-}" ]] || grep -qaE '(docker|podman|toolbox|distrobox)' /proc/1/environ 2>/dev/null
+}
+
 dbu_detect_environment() {
   dbu_info "Detecting environment..."
 
@@ -21,7 +25,29 @@ dbu_detect_environment() {
     dbu_warn "Could not read /etc/os-release"
   fi
 
-  if [[ -f /.dockerenv ]]; then
-    dbu_info "Container-like environment detected."
+  if dbu_in_container; then
+    dbu_info "Container environment detected."
+  else
+    dbu_info "Host environment detected."
   fi
+}
+
+dbu_validate_mode() {
+  local mode="$1"
+
+  case "$mode" in
+    auto)
+      return 0
+      ;;
+    host)
+      if dbu_in_container; then
+        dbu_warn "Mode is host, but this appears to be a container."
+      fi
+      ;;
+    container)
+      if ! dbu_in_container; then
+        dbu_warn "Mode is container, but this appears to be the host."
+      fi
+      ;;
+  esac
 }

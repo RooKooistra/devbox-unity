@@ -14,15 +14,9 @@ Unfortunately, game development tools often assume a traditional Linux installat
 
 DevBox Unity exists to make that experience predictable.
 
-The goal is simple:
-
 > Spend your time building games, not configuring your computer.
 
 ## Principles
-
-DevBox Unity respects the developer.
-
-That means:
 
 - No telemetry
 - No advertising
@@ -33,41 +27,30 @@ That means:
 - Safe defaults
 - Clear documentation
 
-Donations may support future development and infrastructure, but DevBox Unity itself remains free.
+## Current Status
 
-## Target Setup
+Milestone 2: installer framework.
 
-### Host
+This milestone adds the reusable installer foundation: configuration loading, logging, environment checks, dry-run support, host/container mode detection, and safe command helpers.
 
-- Bazzite or another immutable Linux distribution
-- Distrobox
-- NVIDIA support where applicable
-- GNOME desktop integration
-
-### Container
-
-- Ubuntu 26.04
-- Unity Hub
-- Unity 6 LTS
-- JetBrains Rider support
-- Firefox without Snap
-- .NET SDK
-- Git and Git LFS
-- Optional GitKraken support
+It does not yet install Unity, Rider, Firefox, GitKraken, or Android tooling.
 
 ## Planned Install Flow
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/devbox-unity.git
-cd devbox-unity
 ./install.sh
 ```
 
-The installer will guide the user through host checks, container setup, package installation, Unity Hub integration, and desktop launcher exports.
+Useful options:
+
+```bash
+./install.sh --help
+./install.sh --dry-run
+./install.sh --mode host
+./install.sh --mode container
+```
 
 ## Unity Folder Layout
-
-DevBox Unity uses a single Unity root directory:
 
 ```text
 ~/Unity/
@@ -77,12 +60,6 @@ DevBox Unity uses a single Unity root directory:
 ├── Cache
 └── Licenses
 ```
-
-## Current Status
-
-Milestone 1: repository foundation.
-
-The installer framework is present but intentionally does not perform a full installation yet.
 
 ## License
 
