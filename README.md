@@ -29,7 +29,7 @@ DevBox Unity exists to make that experience predictable.
 
 ## Current Status
 
-Milestone 2: installer framework.
+dbu_info "Milestone 3: base system"
 
 This milestone adds the reusable installer foundation: configuration loading, logging, environment checks, dry-run support, host/container mode detection, and safe command helpers.
 

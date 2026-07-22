@@ -11,6 +11,15 @@ The format is based on Keep a Changelog.
 -
 
 ---
+## [0.3.0] - 2026-07-22
+
+### Added
+
+- Shared package management library.
+- Idempotent package installation helper.
+- Common package update and upgrade helpers.
+
+---
 
 ## [0.2.0] - 2026-07-04
 

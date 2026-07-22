@@ -19,6 +19,8 @@ source "$SCRIPT_DIR/lib/config.sh"
 source "$SCRIPT_DIR/lib/validation.sh"
 source "$SCRIPT_DIR/lib/distrobox.sh"
 source "$SCRIPT_DIR/lib/runner.sh"
+source "$SCRIPT_DIR/lib/packages.sh"
+source "$SCRIPT_DIR/container/install-base.sh"
 
 DBU_MODE="auto"
 DBU_DRY_RUN="false"
@@ -102,9 +104,21 @@ main() {
   dbu_info "  Mode:      $DBU_MODE"
   dbu_info "  Dry run:   $DBU_DRY_RUN"
 
-  dbu_create_unity_directories
+dbu_create_unity_directories
 
-  dbu_success "Milestone 2 framework completed successfully."
+dbu_info ""
+dbu_info "==============================="
+dbu_info "Installing DevBox Unity"
+dbu_info "==============================="
+dbu_info ""
+
+dbu_info "[1/1] Base System"
+
+dbu_install_base
+
+dbu_success ""
+dbu_success "Milestone 3 completed successfully."
+  
 }
 
 main "$@"
