@@ -25,6 +25,34 @@ fail() {
 
 [[ -f "$ROOT_DIR/container/install-firefox.sh" ]] \
     || fail "Missing install-firefox.sh"
+    
+[[ -f "$ROOT_DIR/lib/hardware.sh" ]] \
+    || fail "Missing hardware.sh"
+
+grep -q "dbu_detect_gpu_vendor" "$ROOT_DIR/lib/hardware.sh" \
+    || fail "GPU detection logic missing."
+
+grep -q 'DBU_GPU_VENDOR="amd"' "$ROOT_DIR/lib/hardware.sh" \
+    || fail "AMD GPU detection missing."
+
+grep -q 'DBU_GPU_VENDOR="intel"' "$ROOT_DIR/lib/hardware.sh" \
+    || fail "Intel GPU detection missing."
+    
+grep -q "dbu_detect_nvidia_cdi" "$ROOT_DIR/lib/hardware.sh" \
+    || fail "NVIDIA CDI detection missing."
+
+grep -q "nvidia.com/gpu=all" "$ROOT_DIR/lib/hardware.sh" \
+    || fail "NVIDIA CDI device detection missing."
+
+grep -q "DBU_NVIDIA_CDI_AVAILABLE" "$ROOT_DIR/lib/hardware.sh" \
+    || fail "NVIDIA CDI state missing."
+
+grep -q "nvidia.com/gpu=all" "$ROOT_DIR/lib/distrobox.sh" \
+    || fail "NVIDIA CDI container integration missing."
+
+if grep -q 'create_args+=(--nvidia)' "$ROOT_DIR/lib/distrobox.sh"; then
+    fail "Legacy Distrobox --nvidia integration is still present."
+fi
 
 grep -q "dbu_install_base" "$ROOT_DIR/container/install-base.sh" \
     || fail "Base installer missing."

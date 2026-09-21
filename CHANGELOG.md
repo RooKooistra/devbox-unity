@@ -6,6 +6,23 @@ The format is based on Keep a Changelog.
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-09-21
+
+### Added
+
+- Host GPU vendor detection.
+- NVIDIA, AMD, and Intel graphics identification.
+- NVIDIA CDI availability detection.
+- GPU-aware Distrobox container creation.
+- Safe fallback for unknown graphics hardware.
+
+### Changed
+
+- NVIDIA systems now use NVIDIA CDI device passthrough for container GPU access.
+- AMD and Intel systems use Distrobox's standard GPU integration.
+- Container creation no longer assumes NVIDIA hardware.
+- NVIDIA container creation now fails clearly when required CDI support is unavailable.
+
 ## [0.5.0] - 2026-09-21
 
 ### Added

@@ -28,17 +28,35 @@ dbu_create_container() {
     dbu_info "Creating container: $DBU_CONTAINER_NAME"
     dbu_info "Image: $DBU_CONTAINER_IMAGE"
 
+    dbu_detect_gpu_vendor
+
+    local -a create_args=(
+        create
+        --name "$DBU_CONTAINER_NAME"
+        --image "$DBU_CONTAINER_IMAGE"
+        --yes
+    )
+
+    if [[ "$DBU_GPU_VENDOR" == "nvidia" ]]; then
+        if dbu_is_true "$DBU_NVIDIA_CDI_AVAILABLE"; then
+            dbu_info "Enabling NVIDIA GPU access through CDI."
+            create_args+=(
+                --additional-flags
+                "--device nvidia.com/gpu=all"
+            )
+        else
+            dbu_error "NVIDIA GPU detected, but NVIDIA CDI is unavailable."
+            dbu_error "Cannot safely configure NVIDIA GPU access."
+            return 1
+        fi
+    fi
+
     if dbu_is_true "${DBU_DRY_RUN:-false}"; then
-        dbu_info \
-            "[DRY] distrobox create --name $DBU_CONTAINER_NAME --image $DBU_CONTAINER_IMAGE --nvidia --yes"
+        dbu_info "[DRY] distrobox ${create_args[*]}"
         return 0
     fi
 
-    distrobox create \
-        --name "$DBU_CONTAINER_NAME" \
-        --image "$DBU_CONTAINER_IMAGE" \
-        --nvidia \
-        --yes
+    distrobox "${create_args[@]}"
 }
 
 dbu_ensure_container() {

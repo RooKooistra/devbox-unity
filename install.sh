@@ -22,6 +22,7 @@ source "$SCRIPT_DIR/lib/packages.sh"
 
 source "$SCRIPT_DIR/container/install-base.sh"
 source "$SCRIPT_DIR/container/install-firefox.sh"
+source "$SCRIPT_DIR/lib/hardware.sh"
 
 DBU_MODE="auto"
 DBU_DRY_RUN="false"
@@ -40,8 +41,11 @@ Options:
   -y, --yes         Assume yes for confirmations
   -h, --help        Show this help
 
-Current milestone installs the base development environment and Firefox.
-Unity, Rider, GitKraken, and Android tooling are not installed yet.
+Current milestone automatically routes installation between the
+immutable host and Ubuntu development container, with GPU-aware
+container configuration for NVIDIA, AMD, and Intel graphics.
+
+Run ./install.sh normally from the host for the standard installation.
 EOF
 }
 
@@ -132,7 +136,7 @@ main() {
   parse_args "$@"
 
   dbu_banner
-  dbu_info "Milestone 5: host/container execution"
+  dbu_info "Milestone 6: GPU-aware container setup"
 
   dbu_load_config "$SCRIPT_DIR/config.env"
 
