@@ -6,6 +6,23 @@ The format is based on Keep a Changelog.
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-09-21
+
+### Added
+
+- Automatic host/container installation routing.
+- Distrobox container existence detection.
+- Automatic Ubuntu development container creation.
+- Host-to-container installer execution.
+- Strict Ubuntu container validation.
+
+### Changed
+
+- Host and container modes now enforce their execution environments.
+- Ubuntu package installation can no longer run directly against the host.
+- Unity development directories are created during container setup.
+- Installer can now be launched from the immutable host as the primary entry point.
+
 ## [0.4.0] - 2026-09-21
 
 ### Added

@@ -81,11 +81,58 @@ parse_args() {
   esac
 }
 
+dbu_run_container_modules() {
+    dbu_validate_container_environment
+
+    dbu_create_unity_directories
+
+    dbu_info ""
+    dbu_info "==============================="
+    dbu_info "Installing DevBox Unity"
+    dbu_info "==============================="
+    dbu_info ""
+
+    dbu_info "[1/2] Base System"
+    dbu_install_base
+
+    dbu_info ""
+    dbu_info "[2/2] Firefox"
+    dbu_install_firefox
+
+    dbu_success ""
+    dbu_success "Container installation completed successfully."
+}
+
+dbu_run_host_installation() {
+    dbu_validate_host_environment
+    dbu_ensure_container
+
+    if dbu_is_true "$DBU_DRY_RUN"; then
+        dbu_success "Host dry run completed successfully."
+        return 0
+    fi
+
+    dbu_run_installer_in_container "$SCRIPT_DIR/install.sh"
+
+    dbu_success ""
+    dbu_success "Milestone 5 completed successfully."
+}
+
+dbu_run_auto_installation() {
+    if dbu_in_container; then
+        dbu_info "Running container installation."
+        dbu_run_container_modules
+    else
+        dbu_info "Running host installation."
+        dbu_run_host_installation
+    fi
+}
+
 main() {
   parse_args "$@"
 
   dbu_banner
-  dbu_info "Milestone 4: Firefox"
+  dbu_info "Milestone 5: host/container execution"
 
   dbu_load_config "$SCRIPT_DIR/config.env"
 
@@ -105,23 +152,17 @@ main() {
   dbu_info "  Mode:      $DBU_MODE"
   dbu_info "  Dry run:   $DBU_DRY_RUN"
 
-  dbu_create_unity_directories
-
-  dbu_info ""
-  dbu_info "==============================="
-  dbu_info "Installing DevBox Unity"
-  dbu_info "==============================="
-  dbu_info ""
-
-  dbu_info "[1/2] Base System"
-  dbu_install_base
-
-  dbu_info ""
-  dbu_info "[2/2] Firefox"
-  dbu_install_firefox
-
-  dbu_success ""
-  dbu_success "Milestone 4 completed successfully."
+  case "$DBU_MODE" in
+    auto)
+      dbu_run_auto_installation
+      ;;
+    host)
+      dbu_run_host_installation
+      ;;
+    container)
+      dbu_run_container_modules
+      ;;
+  esac
 }
 
 main "$@"

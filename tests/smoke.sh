@@ -34,5 +34,17 @@ grep -q "dbu_install_firefox" "$ROOT_DIR/container/install-firefox.sh" \
 
 grep -q "DBU_MOZILLA_FINGERPRINT" "$ROOT_DIR/container/install-firefox.sh" \
     || fail "Mozilla key verification missing."
+    
+grep -q "dbu_run_host_installation" "$ROOT_DIR/install.sh" \
+    || fail "Host execution path missing."
+
+grep -q "dbu_run_container_modules" "$ROOT_DIR/install.sh" \
+    || fail "Container execution path missing."
+
+grep -q "dbu_ensure_container" "$ROOT_DIR/lib/distrobox.sh" \
+    || fail "Container creation logic missing."
+
+grep -q "dbu_validate_container_environment" "$ROOT_DIR/lib/validation.sh" \
+    || fail "Container validation missing."
 
 printf 'Smoke test passed.\n'
