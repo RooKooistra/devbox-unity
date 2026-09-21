@@ -29,11 +29,19 @@ DevBox Unity exists to make that experience predictable.
 
 ## Current Status
 
-dbu_info "Milestone 3: base system"
+Milestone 4 adds Firefox installation from Mozilla's official APT repository.
 
-This milestone adds the reusable installer foundation: configuration loading, logging, environment checks, dry-run support, host/container mode detection, and safe command helpers.
+The installer currently provides:
 
-It does not yet install Unity, Rider, Firefox, GitKraken, or Android tooling.
+- Base Ubuntu development packages
+- Firefox from Mozilla's official DEB repository
+- Configuration loading
+- Logging and environment checks
+- Dry-run support
+- Host/container mode detection
+- Unity development directory creation
+
+Unity Hub, Rider, GitKraken, and Android tooling are not installed yet.
 
 ## Planned Install Flow
 

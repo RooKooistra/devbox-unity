@@ -6,9 +6,21 @@ The format is based on Keep a Changelog.
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-09-21
+
 ### Added
 
--
+- Firefox installation module.
+- Mozilla official APT repository configuration.
+- Mozilla repository signing-key fingerprint verification.
+- Mozilla package priority configuration.
+- Firefox installation verification.
+
+### Changed
+
+- Installer now runs the Base System and Firefox modules sequentially.
+- Smoke tests now use repository-root paths and validate the Firefox module.
+- Updated installer help and README status for Milestone 4.
 
 ---
 ## [0.3.0] - 2026-07-22

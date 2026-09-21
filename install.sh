@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 #
 # DevBox Unity
 #
@@ -20,7 +19,9 @@ source "$SCRIPT_DIR/lib/validation.sh"
 source "$SCRIPT_DIR/lib/distrobox.sh"
 source "$SCRIPT_DIR/lib/runner.sh"
 source "$SCRIPT_DIR/lib/packages.sh"
+
 source "$SCRIPT_DIR/container/install-base.sh"
+source "$SCRIPT_DIR/container/install-firefox.sh"
 
 DBU_MODE="auto"
 DBU_DRY_RUN="false"
@@ -39,8 +40,8 @@ Options:
   -y, --yes         Assume yes for confirmations
   -h, --help        Show this help
 
-Milestone 2 only validates the installer framework.
-It does not install Unity or development tools yet.
+Current milestone installs the base development environment and Firefox.
+Unity, Rider, GitKraken, and Android tooling are not installed yet.
 EOF
 }
 
@@ -84,7 +85,7 @@ main() {
   parse_args "$@"
 
   dbu_banner
-  dbu_info "Milestone 2: installer framework"
+  dbu_info "Milestone 4: Firefox"
 
   dbu_load_config "$SCRIPT_DIR/config.env"
 
@@ -104,21 +105,23 @@ main() {
   dbu_info "  Mode:      $DBU_MODE"
   dbu_info "  Dry run:   $DBU_DRY_RUN"
 
-dbu_create_unity_directories
+  dbu_create_unity_directories
 
-dbu_info ""
-dbu_info "==============================="
-dbu_info "Installing DevBox Unity"
-dbu_info "==============================="
-dbu_info ""
+  dbu_info ""
+  dbu_info "==============================="
+  dbu_info "Installing DevBox Unity"
+  dbu_info "==============================="
+  dbu_info ""
 
-dbu_info "[1/1] Base System"
+  dbu_info "[1/2] Base System"
+  dbu_install_base
 
-dbu_install_base
+  dbu_info ""
+  dbu_info "[2/2] Firefox"
+  dbu_install_firefox
 
-dbu_success ""
-dbu_success "Milestone 3 completed successfully."
-  
+  dbu_success ""
+  dbu_success "Milestone 4 completed successfully."
 }
 
 main "$@"
